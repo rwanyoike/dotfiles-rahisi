@@ -2,6 +2,8 @@
 
 set -euo pipefail
 
+printf "%s\n\n" "::: dotfiles-rahisi v0.1"
+
 DOTFILES_DIR="${HOME}/.dotfiles"
 
 # Ref: http://www.binaryphile.com/bash/2020/01/12/determining-the-location-of-your-script-in-bash.html
