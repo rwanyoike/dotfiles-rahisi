@@ -11,7 +11,6 @@ function dotfiles_print() {
 }
 export -f dotfiles_print
 
-
 # ${1}: repo
 # ${2}: dest
 # ${3}: version
@@ -19,11 +18,10 @@ function dotfiles_git() {
   if [[ ! -d ${2} ]]; then
     git clone "${1}" "${2}"
   fi
-
-  pushd "${2}" >/dev/null 2>&1
+  pushd "${2}" >/dev/null 2>&1 || (echo "! pushd fail" && exit 1)
   git fetch -pPt
-  git reset --hard "origin/${3:-master}"
-  popd >/dev/null 2>&1
+  git reset --hard "origin/${3:-main}"
+  popd >/dev/null 2>&1 || (echo "! popd fail" && exit 1)
 }
 export -f dotfiles_git
 
@@ -31,7 +29,7 @@ export -f dotfiles_git
 # ${2}: dest
 function dotfiles_link() {
   if [[ ! -h ${2} ]]; then
-    ln -s "${1}" "${2}"
+    ln -sv "${1}" "${2}"
   fi
 }
 export -f dotfiles_link
@@ -39,7 +37,7 @@ export -f dotfiles_link
 # ${1}: path
 function dotfiles_mkdir() {
   if [[ ! -d ${1} ]]; then
-    mkdir -p "${1}"
+    mkdir -pv "${1}"
   fi
 }
 export -f dotfiles_mkdir

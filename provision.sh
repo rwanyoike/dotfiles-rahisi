@@ -28,7 +28,7 @@ fi
 if [[ -d ${DOTFILES_DIR}.d ]]; then
   dotfiles_print "--> execute ${DOTFILES_DIR}.d"
   for file in "${DOTFILES_DIR}.d"/*.sh; do
-    dotfiles_print "... ./$(basename "${file}")"
+    dotfiles_print "  $ ./$(basename "${file}")"
     bash "${file}" || break
   done
 fi
